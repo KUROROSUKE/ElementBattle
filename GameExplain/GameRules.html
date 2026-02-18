@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>元素ゲーム ルール & 操作ガイド</title>
+
+  <!-- Google Font → Noto Sans JP は表示品質が高く、日本語との相性◎ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="shortcut icon" href="https://kurorosuke.github.io/EB3/favicon.ico" />
+
+  <style>
+    /* ─── ベースリセット ───────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    body {
+      background: #f7f7fa;
+      padding: 1.5rem;
+      max-width: 960px;
+      margin-inline: auto;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    /* ─── タイポグラフィ ──────────────────────── */
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin: 1rem 0 0.5rem;
+      border-bottom: 4px solid #0077cc;
+      padding-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      color: #0077cc;
+      margin-top: 1.25rem;
+    }
+
+    p {
+      margin: 0.5rem 0;
+    }
+
+    ul,
+    ol {
+      margin: 0.5rem 0 1rem 1.25rem;
+      padding-left: 1rem;
+    }
+
+    dl {
+      margin: 0.5rem 0 1rem;
+    }
+
+    dt {
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    dd {
+      margin-left: 1rem;
+    }
+
+    code {
+      background: #eeeeee;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    /* ─── レイアウトユーティリティ ──────────────── */
+    .section {
+      margin-top: 1rem;
+    }
+
+    nav {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>元素ゲーム ルール & 操作ガイド</h1>
+  </header>
+
+  <main>
+    <!-- 1. ゲームの始め方 -->
+    <section class="section">
+      <h2>1. ゲームの始め方</h2>
+      <ol>
+        <li><strong>スタート</strong> ボタンを押してゲームを開始します。</li>
+        <li>ゲーム画面に切り替わったら、手札を確認して行動を選択します。</li>
+      </ol>
+    </section>
+
+    <!-- 2. 操作ボタン -->
+    <section class="section">
+      <h2>2. 操作ボタン</h2>
+      <ul>
+        <li><code>精製</code>：自分の手札のみで役を作ってアガる。</li>
+        <li><code>融合</code>：相手が最後に捨てた札も使ってアガる。</li>
+        <li><code>ヒント</code>：手札に近い物質をコサイン近似で提案。</li>
+        <li><code>この役でアガる</code>：選択した化合物でアガる。</li>
+      </ul>
+    </section>
+
+    <!-- 3. ゲームの流れ -->
+    <section class="section">
+      <h2>3. ゲームの流れ</h2>
+      <p><code>精製</code> か <code>融合</code> のあと使う元素のカードを選択し <code>この役でアガる</code> ボタンで確定します。</p>
+      <p>
+        100&nbsp;ポイント差が付くか、5ゲームを終えると（この値は設定で調節可能です）
+        <strong>ラウンド終了</strong> ボタンが現れ、押すとスタート画面へ戻ります。
+      </p>
+    </section>
+
+    <!-- 4. 得点計算 -->
+    <section class="section">
+      <h2>4. 得点計算</h2>
+      <ul>
+        <li>物質の相性 ：　× <code>1.5〜2.0</code>（乱数）</li>
+        <li>特定カードを含む役：　 × <code>1.5</code></li>
+        <li>融合でアガる：　 ÷ <code>1.2</code></li>
+        <li>後手でアガる：　 ÷ <code>1.5</code></li>
+      </ul>
+    </section>
+
+    <!-- 5. AI 学習 -->
+    <section class="section">
+      <h2>5. AI 学習</h2>
+      <p><code>この役でアガる</code> を押したタイミングで以下の特徴量を <strong>2Epoch&nbsp;</strong> で学習します。</p>
+      <ul>
+        <li>手札中の各カード枚数</li>
+        <li>精製／融合フラグ</li>
+        <li>交換した総枚数</li>
+      </ul>
+      <p>ヒント表示用「手札に近い物質」は <strong>1Epoch&nbsp;</strong> で学習。（つまり合計3Epoch）</p>
+      <p>作成した物質の統計的なデータはブラウザの <code>IndexedDB</code> に保存されます。</p>
+      <p>なお、P2P対戦の場合どちらも無効化されます</p>
+    </section>
+
+    <!-- 6. 設定項目 -->
+    <section class="section">
+      <h2>6. 設定項目</h2>
+      <dl>
+        <dt><code>コールドスコア</code></dt>
+        <dd>ラウンド終了となるポイント差</dd>
+        <dt><code>ゲームターン数</code></dt>
+        <dd>ラウンド終了となるゲーム数</dd>
+        <dt><code>学習するか</code></dt>
+        <dd>AIが学習するか。（オフの場合は推論のみ）</dd>
+        <dt><code>相手しきい値</code></dt>
+        <dd>相手が「融合」で上がるときの条件（この値以上のポイントが得られそうなら融合を行う）</dd>
+        <dt><code>化合物のURL(JSON)</code></dt>
+        <dd>使用する化合物データ（<code>standard</code>/<code>extended</code>/<code>compact</code> など）</dd>
+        <dt><code>AIモデルの設定</code></dt>
+        <dd>AI モデルを追加（読込）・選択・保存・削除</dd>
+      </dl>
+    </section>
+
+    <!-- 7. ナビゲーション -->
+    <section class="section">
+      <h2>7. ナビゲーション</h2>
+      <dl>
+        <dt><code>ゲーム画面</code></dt>
+        <dd>ゲームのスタートが可能です</dd>
+        <dt><code>設定画面</code></dt>
+        <dd>上述の様々な設定項目を設定可能です</dd>
+        <dt><code>分子辞書画面</code></dt>
+        <dd>分子の一覧と、その検索ができます。また、各分子カードをクリック（タップ）すると以下の詳細が表示できます<br>
+            ・名前、組成式、ポイント、有利な物質（一部の物質のみ）などの情報<br>
+            ・自分で設定可能な文章（初期でwikipediaページ付き。すべてのページが正しいかは確認していません。）<br>
+            ・3D構造（3DMol.jsを利用しています。一部の物質は未対応です。）
+        </dd>
+        <dt><code>ランキング画面</code></dt>
+        <dd>ログインした人たちのレートを表示しています</dd>
+        <dt><code>ユーザーデータ画面</code></dt>
+        <dd>ユーザーがログインしたり、名前を変更したり、レートを確認したりできます。</dd>
+        <dt><code>クエスト画面</code></dt>
+        <dd>現在のクエストと、クエスト進捗度、クエスト一覧を表示します</dd>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>
