@@ -80,7 +80,7 @@ async function initializeMaterials() {
 // --------- website visit ---------
 // load materials JSON file (initialize)
 async function init_json() {
-    compoundsURL = "https://kurorosuke.github.io/compounds/obf_extended_min.json"
+    compoundsURL = "https://ElementBattle.github.io/compounds/obf_extended_min.json"
     materials = await loadMaterials(compoundsURL);
 }
 // load materials from url
@@ -1318,7 +1318,7 @@ async function loadModel(url=null, NameOfModel=null) {
                 model = await tf.loadLayersModel('indexeddb://standardModel2'); // IndexedDB からロード
                 console.log("ローカルの学習済みモデルをロードしました");
             } else {
-                model = await tf.loadLayersModel('https://kurorosuke.github.io/AI_models/model3/model.json'); // 外部モデルをロード
+                model = await tf.loadLayersModel('https://ElementBattle.github.io/AI_models/model3/model.json'); // 外部モデルをロード
                 console.log("サーバーからモデルをロードしました");
                 await saveModel();
             };
@@ -2435,7 +2435,7 @@ async function saveWinSettings() {
     const thresholdInput = parseFloat(document.getElementById("threshold").value);
     const isTraining = document.getElementById("IsTraining").value;
     const compoundsSelection = document.getElementById("compoundsSelection").value;
-    compoundsURL = compoundsSelection === "url" ? document.getElementById("compoundsURL").value : `https://kurorosuke.github.io/compounds/obf_${compoundsSelection}_min.json`;
+    compoundsURL = compoundsSelection === "url" ? document.getElementById("compoundsURL").value : `https://ElementBattle.github.io/compounds/obf_${compoundsSelection}_min.json`;
 
     if (isNaN(winPointInput)) {
         alert("コールドスコア は 1 以上 999 以下の数値を入力してください。");
@@ -2738,7 +2738,7 @@ function applyModalSetting() {
         if (!removeTarget.includes(selectingModel)) {
             loadModel("notNull",selectingModel);
         } else {
-            loadModel("https://kurorosuke.github.io/AI_models/model3");
+            loadModel("https://ElementBattle.github.io/AI_models/model3");
         };
     }
     closeModelModal();
@@ -2882,7 +2882,7 @@ async function view3DMaterial(formula) {
     const v = createOrGetViewer();
     v.removeAllModels(); v.removeAllShapes();
 
-    const url = `https://kurorosuke.github.io/MolData/${await normalizeFormula(formula)}.mol`;
+    const url = `https://ElementBattle.github.io/MolData/${await normalizeFormula(formula)}.mol`;
     const mol = await (await fetch(url)).text();
     //console.log(mol);
 
@@ -3222,4 +3222,5 @@ function launchConfetti() {
       origin: { y: 0.6 }    // 発生位置（画面中央寄り）
     });
   }
+
 }
