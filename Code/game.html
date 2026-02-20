@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="元素を作成して遊ぶゲーム"/>
     <meta http-equiv="Cache-Control" content="public, max-age=604800">
-    <link rel="shortcut icon" href="https://kurorosuke.github.io/EB3/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://kurorosuke.github.io/EB3/icons/apple-touch-icon-180x180.png" sizes="180×180">
-    <link rel="manifest" href="https://kurorosuke.github.io/EB3/manifest.json">
+    <link rel="shortcut icon" href="https://ElementBattle.github.io/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://ElementBattle.github.io/icons/apple-touch-icon-180x180.png" sizes="180×180">
+    <link rel="manifest" href="https://ElementBattle.github.io/manifest.json">
     <meta name="theme-color" content="#000000">
     <title>エメバト</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core" defer></script>
@@ -73,7 +73,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('https://kurorosuke.github.io/EB3/sw.js')
+            navigator.serviceWorker.register('https://ElementBattle.github.io/sw.js')
             //navigator.serviceWorker.register('/sw.js')
                 .then(reg => console.log('Service Worker registered:', reg.scope))
                 .catch(err => console.error('Service Worker registration failed:', err));
@@ -248,7 +248,7 @@
                     <p style="text-align:center; font-weight:bold"> ~ 補足説明 ~ </p>
                     <p>精製：自分の手札だけを使ってアガる事<br>融合：相手が最後に捨てたカードも使ってアガる事</p>
                 </div>
-                <a href="https://kurorosuke.github.io/EB3/GameExplain/GameRules.html">詳しいルール</a>
+                <a href="https://ElementBattle.github.io/GameExplain/GameRules.html">詳しいルール</a>
             </div>
         </div>
         <div id="inGameQuest" style="display:none;">
@@ -287,15 +287,15 @@
                 <div class="row">
                     <label for="compoundsSelection">化合物のURL(JSON)</label>
                     <select id="compoundsSelection" onchange="showInputTag()">
-                        <option value="compact">compact</option>
+                        <option value="compact" selected>compact</option>
                         <option value="standard">standard</option>
-                        <option value="extended" selected>extended</option>
+                        <option value="extended">extended</option>
                         <option value="url">URL</option>
                     </select>
                 </div>
                 <div class="row" id="compoundsUrlRow" style="display:none;">
                     <label for="compoundsURL">　URL</label>
-                    <input type="url" id="compoundsURL" placeholder="https://kurorosuke.github.io/standard.json">
+                    <input type="url" id="compoundsURL" placeholder="https://ElementBattle.github.io/compounds/standard.json">
                 </div>
 
                 <div class="row">
@@ -374,7 +374,7 @@
             <p id="detailAdvantage"></p>
 
             <h3 style="display:inline-block; margin:0; line-height:30px; vertical-align:middle;">説明（Markdown可）</h3>
-            <a href="https://kurorosuke.github.io/EB3/GameExplain/Markdown.html" aria-label="Markdownの説明ページ">
+            <a href="https://ElementBattle.github.io/GameExplain/Markdown.html" aria-label="Markdownの説明ページ">
                 <img
                     src="../images/question_icon.webp"
                     alt="question icon"
@@ -492,3 +492,4 @@
 </body>
 
 </html>
+
